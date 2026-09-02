@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LOG_DIR="$SCRIPT_DIR/logs"
+LOG_FILE="$LOG_DIR/system-info.log"
+mkdir -p "$LOG_DIR"
+
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE"
+}
+
+log "Collecting system information"
+
 echo "===== System Information ====="
 
 echo "Hostname: $(hostname)"
@@ -60,3 +71,5 @@ fi
 echo "Current Working Directory: $(pwd)"
 
 echo "==============================="
+
+log "System information collection completed successfully"
